@@ -1,4 +1,4 @@
-<h2 align="center">تقدیم به حدیث❤️ که منو تو اولین پروژم یاری و تحمل کرد</h2>
+<h2 align="center"></h2>
 
 # doctor dns
 
