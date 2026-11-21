@@ -1,5 +1,3 @@
-<h2 align="center">تقدیم به حدیث❤️ که منو تو اولین پروژم یاری و تحمل کرد</h2>
-
 # doctor dns
 
 *[English](README.md)*
@@ -504,30 +502,6 @@ payloadها زیر `exit 0` می‌نشینند و هر خطشان با `#` شر
 - کانفیگ nginx سرور خروجی در ابتدا از [rohammosalli/smart-dns](https://github.com/rohammosalli/smart-dns) شروع شد.
 
 ---
-
-<div align="center">
-
-## ☕ حمایت از پروژه
-
-**این پروژه رایگان است و رایگان هم می‌ماند.**
-
-از برنامه های اوپن سورس حمایت کنیم❤️<br>
-زنده باد برنامه آزاد🕊<br>
-زنده باد اینترنت آزاد🌐
-
-</div>
-
-<div align="center">
-
-| | |
-|:--|:--|
-| **TON** | `UQAh8oTWt8ec-q4I1zxga1sUYmKmvcQKGDYwspDrsGmUlQKI` |
-| **Tether — BEP20** | `0x8aE738721Ca6Fd9a8a375Df3AC4A144ed5695355` |
-| **Tether — TRON (TRC20)** | `TPiyEnb41qTZz8eM6eqnRwXbPXBZCNS1pm` |
-
-</div>
-
-<a href="https://coffeebede.com/agentmehdi47"><img class="img-fluid" src="https://coffeebede.ir/DashboardTemplateV2/app-assets/images/banner/default-yellow.svg" /></a>
 
 ## لایسنس
 
