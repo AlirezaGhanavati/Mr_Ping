@@ -2926,7 +2926,7 @@ def wg_plan_allows(store, user):
 
 def wg_name(store):
     raw = (store.setting("wg_name") or "").strip()
-    return raw if WG_NAME_RE.fullmatch(raw) else "doctor-dns"
+    return raw if WG_NAME_RE.fullmatch(raw) else "mr-ping"
 
 
 def wg_file_name(name, device_id):

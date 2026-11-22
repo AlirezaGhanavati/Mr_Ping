@@ -38,7 +38,7 @@ STAMP="$(date +%Y%m%d-%H%M%S)"
 # What this file is. Written to the machine once an install finishes, so the
 # next run can tell whether it is an upgrade, a re-run, or somebody about to
 # put an older version over a newer one by accident.
-VERSION="1.0.0"
+VERSION="1.1.0"
 
 # What this install did, so uninstall can undo exactly that and nothing more.
 # Without it, removal would be guesswork: whether dnsmasq was ours or already
@@ -7607,7 +7607,7 @@ exit 0
 #
 #def wg_name(store):
 #    raw = (store.setting("wg_name") or "").strip()
-#    return raw if WG_NAME_RE.fullmatch(raw) else "doctor-dns"
+#    return raw if WG_NAME_RE.fullmatch(raw) else "mr-ping"
 #
 #
 #def wg_file_name(name, device_id):
@@ -16431,7 +16431,8 @@ exit 0
 #
 #
 ## ------------------------------------------------------------- user panel
-## Every colour is named once, here, with the admin panel's names and values.
+## Every colour is named once, here, with the admin panel's names and values - the
+## two panels are one product, and test-theme keeps them so.
 ## The light theme is the same names with other values, so no rule below can
 ## be left dark in one of them. Until the customer picks, their browser's own
 ## setting decides; the button in the corner overrides it for that browser.
@@ -16634,7 +16635,18 @@ exit 0
 #.ping{padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);
 # font-size:13px}
 #.brand{text-align:center;margin:0 0 18px;direction:ltr;line-height:1.15}
-#.brand .mark{font-size:30px;vertical-align:middle;margin-right:8px}
+#.brand{display:flex;align-items:center;justify-content:center;gap:10px}
+#.brand .mark{display:inline-flex}
+#.brand .mark svg{width:clamp(34px,9vw,44px);height:auto}
+#.logo{overflow:visible}
+#.logo circle{fill:none;stroke-width:2.6}
+#.logo .r1{stroke:var(--accent)}
+#.logo .r2{stroke:var(--accent2);opacity:.75}
+#.logo .r3{stroke:var(--accent2);opacity:.38;transform-box:fill-box;transform-origin:center;
+# animation:ping 2.8s ease-out infinite}
+#.logo .dot{fill:var(--accent);stroke:none}
+#@keyframes ping{0%{transform:scale(.6);opacity:.9}80%,100%{transform:scale(1);opacity:0}}
+#@media (prefers-reduced-motion:reduce){.logo .r3{animation:none}}
 #.brand .name{display:inline-block;vertical-align:middle;font-size:clamp(32px,10vw,42px);
 # font-weight:800;letter-spacing:1.5px;color:var(--accent);
 # background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;
@@ -16650,6 +16662,40 @@ exit 0
 #.theme .sun{display:var(--sun)}.theme .moon{display:var(--moon)}
 #.theme.lang{left:auto;right:14px;font-size:12px;font-weight:700;letter-spacing:.5px}
 #html[lang=en] .fa-only,html:not([lang=en]) .en-only{display:none}
+#/* Mr Ping: the look of the customer's pages. Shapes, glow and motion only -
+#   every colour is still one of the palette's names. */
+#body{background-image:radial-gradient(70% 45% at 50% -5%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 70%),
+# radial-gradient(45% 35% at 100% 100%,color-mix(in srgb,var(--accent2) 14%,transparent),transparent 70%);
+# background-attachment:fixed}
+#.card{position:relative;overflow:hidden;border-radius:20px;box-shadow:var(--pop);padding:28px 26px}
+#.card::before{content:'';position:absolute;inset:0 0 auto 0;height:3px;
+# background:linear-gradient(90deg,var(--accent),var(--accent2))}
+#button,a.btn{box-shadow:var(--shadow);transition:transform .12s ease,background .12s ease}
+#button:hover,a.btn:hover{transform:translateY(-1px)}
+#input:focus,textarea:focus{box-shadow:0 0 0 3px color-mix(in srgb,var(--accent2) 28%,transparent);border-color:var(--accent2)}
+#ol.steps{list-style:none;counter-reset:s;display:flex;gap:6px;margin:0 0 24px;padding:0}
+#ol.steps li{counter-increment:s;flex:1;text-align:center;font-size:11.5px;color:var(--faint);
+# position:relative;padding-top:32px}
+#ol.steps li::before{content:counter(s);position:absolute;top:0;left:50%;transform:translateX(-50%);
+# width:24px;height:24px;border-radius:50%;border:1.5px solid var(--line2);background:var(--card);
+# display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--faint);z-index:1}
+#ol.steps li+li::after{content:'';position:absolute;top:11px;inset-inline-start:calc(-50% + 16px);
+# width:calc(100% - 32px);height:2px;background:var(--line)}
+#ol.steps li.done{color:var(--dim)}
+#ol.steps li.done::before{content:'✓';background:var(--accent);border-color:var(--accent);color:var(--bg)}
+#ol.steps li.done+li::after,ol.steps li.cur::after{background:var(--accent)}
+#ol.steps li.cur{color:var(--fg);font-weight:600}
+#ol.steps li.cur::before{border-color:var(--accent);color:var(--accent)}
+#.ipwrap{margin:8px 0 4px;padding:14px 14px 16px;border:1px solid var(--line);border-radius:14px;
+# background:var(--bg)}
+#.ipwrap .k{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);margin-bottom:4px}
+#.ipwrap .k::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent);
+# animation:pulse 2s infinite}
+#@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 55%,transparent)}
+# 70%,100%{box-shadow:0 0 0 9px transparent}}
+#@media (prefers-reduced-motion:reduce){.ipwrap .k::before{animation:none}}
+#.ipwrap .big{margin:0;border:0;background:none;padding:6px 0 0;
+# font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 #"""
 #
 ## Where the installer writes the version it installed. Read per page rather
@@ -16665,8 +16711,13 @@ exit 0
 #        return ""
 #
 #
+#LOGO_SVG = ("<svg class='logo' viewBox='0 0 48 48' width='40' height='40' aria-hidden='true'>"
+#            "<circle class='r3' cx='24' cy='24' r='21'/><circle class='r2' cx='24' cy='24' r='14'/>"
+#            "<circle class='r1' cx='24' cy='24' r='7'/><circle class='dot' cx='24' cy='24' r='3'/></svg>")
+#
+#
 #def brand_html():
-#    return ("<div class='brand'><span class='mark'>🩺</span>"
+#    return ("<div class='brand'><span class='mark'>" + LOGO_SVG + "</span>"
 #            "<span class='name'>Mr Ping</span></div>")
 #
 #
@@ -16803,14 +16854,20 @@ exit 0
 #
 #
 #
+#FAVICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E"
+#           "%3Cg fill='none' stroke-width='3'%3E%3Ccircle cx='24' cy='24' r='20' stroke='%2358a6ff' "
+#           "opacity='.5'/%3E%3Ccircle cx='24' cy='24' r='12' stroke='%2358a6ff'/%3E%3C/g%3E"
+#           "%3Ccircle cx='24' cy='24' r='5' fill='%237dd3a0'/%3E%3C/svg%3E")
+#
+#
 #def user_page(inner):
 #    if is_single():
 #        inner = one_server_words(inner)
 #    return ("""<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8">
 #<meta name="viewport" content="width=device-width,initial-scale=1">
-#<title>%s</title>%s<style>%s</style></head><body>%s
+#<title>%s</title>%s<link rel="icon" href="%s"><style>%s</style></head><body>%s
 #<div class="shell">%s<div class="card">%s</div>%s</div></body></html>"""
-#            % (html.escape(brand()), THEME_HEAD, USER_CSS, THEME_BUTTON,
+#            % (html.escape(brand()), THEME_HEAD, FAVICON, USER_CSS, THEME_BUTTON,
 #               brand_html(), inner, footer_html()))
 #
 #
@@ -17019,9 +17076,12 @@ exit 0
 #    to notice.
 #    """
 #    return (banner +
-#            "<div class='icon'>📍</div><h1>ثبت آی‌پی</h1>"
+#            "<ol class='steps'><li class='done'>ساخت حساب</li>"
+#            "<li class='cur'>ثبت آی‌پی</li><li>اتصال</li></ol>"
+#            "<h1>ثبت آی‌پی</h1>"
 #            "<p class='sub'>سرویس روی همین آی‌پی باز می‌شود.</p>"
-#            "<div class='big'>%s</div>"
+#            "<div class='ipwrap'><div class='k'>آی‌پی اینترنت شما</div>"
+#            "<div class='big'>%s</div></div>"
 #            "<form method='post' action='/register-ip'>"
 #            "<button>همین آی‌پی را ثبت کن</button></form>"
 #            "<p class='note'>اگر این آی‌پی اینترنت خانه یا موبایل شما "
@@ -19080,7 +19140,7 @@ exit 0
 #        if profile:
 #            return self.send(mobileconfig(info), 200, {
 #                "Content-Type": "application/x-apple-aspen-config",
-#                "Content-Disposition": "attachment; filename=doctor-dns.mobileconfig",
+#                "Content-Disposition": "attachment; filename=mr-ping.mobileconfig",
 #                "Cache-Control": "no-store"})
 #        return self.send_html(
 #            "<h1>🔒 DNS امن</h1><div class='sub'>%s</div>" % html.escape(brand())
@@ -19104,7 +19164,7 @@ exit 0
 #            return self.redirect("/")
 #        return self.send(mobileconfig(info, server), 200, {
 #            "Content-Type": "application/x-apple-aspen-config",
-#            "Content-Disposition": "attachment; filename=doctor-dns.mobileconfig",
+#            "Content-Disposition": "attachment; filename=mr-ping.mobileconfig",
 #            "Cache-Control": "no-store"})
 #
 #    def dashboard(self):
@@ -24507,7 +24567,17 @@ exit 0
 # margin:24px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--row)}
 #h3.sec:first-of-type{margin-top:6px}
 #.brand{text-align:center;margin:0 0 18px;direction:ltr;line-height:1.15}
-#.brand .mark{font-size:clamp(28px,6vw,38px);vertical-align:middle;margin-right:10px}
+#.brand .mark{display:inline-flex;vertical-align:middle;margin-right:10px}
+#.brand .mark svg{width:clamp(30px,6vw,42px);height:auto}
+#.logo{overflow:visible}
+#.logo circle{fill:none;stroke-width:2.6}
+#.logo .r1{stroke:var(--accent)}
+#.logo .r2{stroke:var(--accent2);opacity:.75}
+#.logo .r3{stroke:var(--accent2);opacity:.38;transform-box:fill-box;transform-origin:center;
+# animation:ping 2.8s ease-out infinite}
+#.logo .dot{fill:var(--accent);stroke:none}
+#@keyframes ping{0%{transform:scale(.6);opacity:.9}80%,100%{transform:scale(1);opacity:0}}
+#@media (prefers-reduced-motion:reduce){.logo .r3{animation:none}}
 #.brand .name{display:inline-block;vertical-align:middle;font-size:clamp(34px,8vw,50px);
 # font-weight:800;letter-spacing:1.5px;color:var(--accent);
 # background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;
@@ -24552,8 +24622,13 @@ exit 0
 #        return ""
 #
 #
+#LOGO_SVG = ("<svg class='logo' viewBox='0 0 48 48' width='40' height='40' aria-hidden='true'>"
+#            "<circle class='r3' cx='24' cy='24' r='21'/><circle class='r2' cx='24' cy='24' r='14'/>"
+#            "<circle class='r1' cx='24' cy='24' r='7'/><circle class='dot' cx='24' cy='24' r='3'/></svg>")
+#
+#
 #def brand_html():
-#    return ("<div class='brand'><span class='mark'>🩺</span>"
+#    return ("<div class='brand'><span class='mark'>" + LOGO_SVG + "</span>"
 #            "<span class='name'>Mr Ping</span></div>")
 #
 #
@@ -24878,7 +24953,7 @@ exit 0
 #
 #def wg_name():
 #    raw = wg_setting("wg_name").strip()
-#    return raw if WG_NAME_RE.fullmatch(raw) else "doctor-dns"
+#    return raw if WG_NAME_RE.fullmatch(raw) else "mr-ping"
 #
 #
 #def wg_file_name(device_id):
@@ -29280,7 +29355,7 @@ exit 0
 #                    "<tr><td>%s</td><td><form id='w%d' method='post'"
 #                    " action='/%s/api-webhook-save'><input type='hidden' name='id'"
 #                    " value='%d'></form><input form='w%d' name='url' value='%s' dir='ltr'"
-#                    " size='34' placeholder='https://bot.example.com/doctor-dns'></td>"
+#                    " size='34' placeholder='https://bot.example.com/mr-ping'></td>"
 #                    "<td class='acts'><button form='w%d'>ذخیره</button>%s</td></tr>"
 #                    % (html.escape(r["name"]), r["id"], p, r["id"], r["id"],
 #                       html.escape(r["webhook_url"] or "", quote=True), r["id"],
@@ -29839,7 +29914,7 @@ exit 0
 #                       "کم آمدن حافظه، پر شدن جدول اتصال‌ها", kernel, pre))
 #
 #        out.append("<div id='bot'></div><div class='card'><h2>ربات تلگرام "
-#                   "<span class='muted'>(doctor-dns-bot)</span></h2>")
+#                   "<span class='muted'>(Mr Ping bot)</span></h2>")
 #        if read_env(BOT_ENV).get("BOT_TOKEN"):
 #            out.append(pre(bot_journal(60).strip() or "(چیزی نیست)"))
 #            out.append("<p class='muted'><a href='/%s/bot?log=1'>۲۰۰ خط آخر</a> · توکن "
@@ -41526,6 +41601,7 @@ exit 0
 #"آی‌پی آن را این بالا اضافه کنید.": "Add its IP up here.",
 #"آی‌پی ایرانی رله": "Relay’s Iranian IP",
 #"آی‌پی ایرانی مشتری": "Customer’s Iranian IP",
+#"آی‌پی اینترنت شما": "Your internet IP",
 #"آی‌پی اینترنت شما با آنچه ثبت شده فرق دارد. این دکمه آی‌پی فعلی را جایگزین می‌کند.": "Your internet IP is different from the registered one. This button replaces it with your current IP.",
 #"آی‌پی اینترنتی را که می‌خواهید سرویس رویش کار کند بفرستید.": "Send the IP of the internet connection you want the service to work on.",
 #"آی‌پی تک‌سرور تازه": "New single server’s IP",
@@ -41550,6 +41626,7 @@ exit 0
 #"آی‌پی-همین-سرور": "this-server-ip",
 #"آی‌پی:": "IP:",
 #"آی‌پی‌های ثبت‌شده": "Registered IPs",
+#"اتصال": "Connect",
 #"اتصال امن برقرار نشد": "A secure connection could not be made",
 #"اتصال به تلگرام": "Link to Telegram",
 #"اتصال به تلگرام فعلاً راه نیفتاده": "Linking to Telegram is not set up yet",
