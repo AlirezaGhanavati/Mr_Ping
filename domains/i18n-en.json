@@ -1274,7 +1274,7 @@
 "ساعت": "Hour",
 "ساعت دیگر دوباره امتحان کنید": "hours, try again",
 "ساعت پیش": "hours ago",
-"ساعت یک بار گیت‌هاب doctor-dns را چک می‌کند. با زدن دکمه، نصب‌کننده از خود ریلیز دانلود می‌شود و فقط وقتی نصب می‌شود که هشش با هشی که گیت‌هاب منتشر کرده یکی باشد. اول همین سرور آپدیت می‌شود و بعد بقیهٔ سرورها یکی‌یکی. نسخهٔ قدیمی‌تر هیچ‌وقت نصب نمی‌شود.": "hours the panel checks doctor-dns on GitHub. With the button, the installer is downloaded from the release itself and installed only when its hash matches the one GitHub published. This server is upgraded first, then the others one by one. An older version is never installed.",
+"ساعت یک بار گیت‌هاب Mr Ping را چک می‌کند. با زدن دکمه، نصب‌کننده از خود ریلیز دانلود می‌شود و فقط وقتی نصب می‌شود که هشش با هشی که گیت‌هاب منتشر کرده یکی باشد. اول همین سرور آپدیت می‌شود و بعد بقیهٔ سرورها یکی‌یکی. نسخهٔ قدیمی‌تر هیچ‌وقت نصب نمی‌شود.": "hours the panel checks Mr Ping on GitHub. With the button, the installer is downloaded from the release itself and installed only when its hash matches the one GitHub published. This server is upgraded first, then the others one by one. An older version is never installed.",
 "ساعت‌های پرمصرف": "Busiest hours",
 "ساعت‌های پرمصرف — ۷ روز اخیر": "Busiest hours — last 7 days",
 "سایبرپانک ۲۰۷۷": "Cyberpunk 2077",

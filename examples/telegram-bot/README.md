@@ -39,9 +39,9 @@
 اگر ربات را جای دیگری جز سرور خارج می‌خواهید، روی آن سرور:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/mehdi047/doctor-dns/main/examples/telegram-bot/bot.py -o /usr/local/bin/doctor-dns-bot
-curl -fsSL https://raw.githubusercontent.com/mehdi047/doctor-dns/main/examples/telegram-bot/doctor-dns-bot.service -o /etc/systemd/system/doctor-dns-bot.service
-curl -fsSL https://raw.githubusercontent.com/mehdi047/doctor-dns/main/examples/telegram-bot/bot.env.example -o /etc/doctor-dns-bot.env
+curl -fsSL https://raw.githubusercontent.com/AlirezaGhanavati/Mr_Ping/main/examples/telegram-bot/bot.py -o /usr/local/bin/doctor-dns-bot
+curl -fsSL https://raw.githubusercontent.com/AlirezaGhanavati/Mr_Ping/main/examples/telegram-bot/doctor-dns-bot.service -o /etc/systemd/system/doctor-dns-bot.service
+curl -fsSL https://raw.githubusercontent.com/AlirezaGhanavati/Mr_Ping/main/examples/telegram-bot/bot.env.example -o /etc/doctor-dns-bot.env
 chmod 600 /etc/doctor-dns-bot.env
 ```
 

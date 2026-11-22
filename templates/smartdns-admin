@@ -2555,7 +2555,7 @@ def version_key(v):
 # button, then on the other servers one by one as before. The installer is
 # taken only when its hash is the one GitHub publishes for it - or, where a
 # release carries none, when it is byte for byte the one on the main branch.
-GITHUB_REPO = "mehdi047/doctor-dns"
+GITHUB_REPO = "AlirezaGhanavati/Mr_Ping"
 GITHUB_API = "https://api.github.com/repos/%s/releases/latest" % GITHUB_REPO
 GITHUB_RAW = "https://raw.githubusercontent.com/%s/main/doctor-dns.sh" % GITHUB_REPO
 SELF_UPGRADE_DIR = "/var/lib/smart-dns/self-upgrade"
@@ -2905,7 +2905,7 @@ def github_card(p):
     out.append(table)
     out.append("<form method='post' action='/%s/update-check' style='margin-top:8px'>"
                "<button class='ghost'>بررسی دوباره</button></form>"
-               "<p class='muted'>پنل هر %d ساعت یک بار گیت‌هاب doctor-dns را چک می‌کند. با زدن "
+               "<p class='muted'>پنل هر %d ساعت یک بار گیت‌هاب Mr Ping را چک می‌کند. با زدن "
                "دکمه، نصب‌کننده از خود ریلیز دانلود می‌شود و فقط وقتی نصب می‌شود که هشش با هشی "
                "که گیت‌هاب منتشر کرده یکی باشد. اول همین سرور آپدیت می‌شود و بعد بقیهٔ سرورها "
                "یکی‌یکی. نسخهٔ قدیمی‌تر هیچ‌وقت نصب نمی‌شود.</p></div>"
@@ -8838,7 +8838,7 @@ class Admin(http.server.BaseHTTPRequestHandler):
                "می‌مانند.</p>"
                "<p>آدرس: <code>%s</code></p>"
                "<p class='muted'>راهنمای کامل دستورها: "
-               "<a href='https://github.com/mehdi047/doctor-dns/blob/main/docs/bot-api.md'"
+               "<a href='https://github.com/AlirezaGhanavati/Mr_Ping/blob/main/docs/bot-api.md'"
                " target='_blank' rel='noopener'>docs/bot-api.md</a>. "
                "پورت ۸۴۴۵ را اگر فایروال سرور یا دیتاسنتر دارد باز کنید.</p></div>"
                % html.escape(bot_api_url())]

@@ -38,7 +38,7 @@ STAMP="$(date +%Y%m%d-%H%M%S)"
 # What this file is. Written to the machine once an install finishes, so the
 # next run can tell whether it is an upgrade, a re-run, or somebody about to
 # put an older version over a newer one by accident.
-VERSION="0.11.0"
+VERSION="1.0.0"
 
 # What this install did, so uninstall can undo exactly that and nothing more.
 # Without it, removal would be guesswork: whether dnsmasq was ours or already
@@ -976,7 +976,7 @@ case "${1:-}" in -V|--version|-h|--help) ;; *) banner ;; esac
 # install with twenty configs missing.
 [ "$(tail -n 1 "$SELF")" = "#__DOCTOR_DNS_COMPLETE__" ] || die "this file is incomplete - the
     download stopped early. Fetch it again:
-        curl -fsSLO https://raw.githubusercontent.com/mehdi047/doctor-dns/main/doctor-dns.sh"
+        curl -fsSLO https://raw.githubusercontent.com/AlirezaGhanavati/Mr_Ping/main/doctor-dns.sh"
 command -v apt-get >/dev/null 2>&1 || die "this installer expects Debian or Ubuntu"
 
 # ---------------------------------------------------------------- uninstall
@@ -1299,7 +1299,7 @@ if [ -n "$INSTALLED_VERSION" ] && [ "$INSTALLED_VERSION" != "$VERSION" ]; then
         warn "this file is OLDER than what is installed."
         warn "installing it will put old configs over new ones, and this"
         warn "script has no way to undo what a later version did."
-        warn "the newest is at github.com/mehdi047/doctor-dns/releases"
+        warn "the newest is at github.com/AlirezaGhanavati/Mr_Ping/releases"
         answer=n
     else
         warn "this will upgrade this machine from $INSTALLED_VERSION to $VERSION."

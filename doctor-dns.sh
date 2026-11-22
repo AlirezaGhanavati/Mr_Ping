@@ -38,7 +38,7 @@ STAMP="$(date +%Y%m%d-%H%M%S)"
 # What this file is. Written to the machine once an install finishes, so the
 # next run can tell whether it is an upgrade, a re-run, or somebody about to
 # put an older version over a newer one by accident.
-VERSION="0.11.0"
+VERSION="1.0.0"
 
 # What this install did, so uninstall can undo exactly that and nothing more.
 # Without it, removal would be guesswork: whether dnsmasq was ours or already
@@ -976,7 +976,7 @@ case "${1:-}" in -V|--version|-h|--help) ;; *) banner ;; esac
 # install with twenty configs missing.
 [ "$(tail -n 1 "$SELF")" = "#__DOCTOR_DNS_COMPLETE__" ] || die "this file is incomplete - the
     download stopped early. Fetch it again:
-        curl -fsSLO https://raw.githubusercontent.com/mehdi047/doctor-dns/main/doctor-dns.sh"
+        curl -fsSLO https://raw.githubusercontent.com/AlirezaGhanavati/Mr_Ping/main/doctor-dns.sh"
 command -v apt-get >/dev/null 2>&1 || die "this installer expects Debian or Ubuntu"
 
 # ---------------------------------------------------------------- uninstall
@@ -1299,7 +1299,7 @@ if [ -n "$INSTALLED_VERSION" ] && [ "$INSTALLED_VERSION" != "$VERSION" ]; then
         warn "this file is OLDER than what is installed."
         warn "installing it will put old configs over new ones, and this"
         warn "script has no way to undo what a later version did."
-        warn "the newest is at github.com/mehdi047/doctor-dns/releases"
+        warn "the newest is at github.com/AlirezaGhanavati/Mr_Ping/releases"
         answer=n
     else
         warn "this will upgrade this machine from $INSTALLED_VERSION to $VERSION."
@@ -22950,7 +22950,7 @@ exit 0
 ## button, then on the other servers one by one as before. The installer is
 ## taken only when its hash is the one GitHub publishes for it - or, where a
 ## release carries none, when it is byte for byte the one on the main branch.
-#GITHUB_REPO = "mehdi047/doctor-dns"
+#GITHUB_REPO = "AlirezaGhanavati/Mr_Ping"
 #GITHUB_API = "https://api.github.com/repos/%s/releases/latest" % GITHUB_REPO
 #GITHUB_RAW = "https://raw.githubusercontent.com/%s/main/doctor-dns.sh" % GITHUB_REPO
 #SELF_UPGRADE_DIR = "/var/lib/smart-dns/self-upgrade"
@@ -23300,7 +23300,7 @@ exit 0
 #    out.append(table)
 #    out.append("<form method='post' action='/%s/update-check' style='margin-top:8px'>"
 #               "<button class='ghost'>بررسی دوباره</button></form>"
-#               "<p class='muted'>پنل هر %d ساعت یک بار گیت‌هاب doctor-dns را چک می‌کند. با زدن "
+#               "<p class='muted'>پنل هر %d ساعت یک بار گیت‌هاب Mr Ping را چک می‌کند. با زدن "
 #               "دکمه، نصب‌کننده از خود ریلیز دانلود می‌شود و فقط وقتی نصب می‌شود که هشش با هشی "
 #               "که گیت‌هاب منتشر کرده یکی باشد. اول همین سرور آپدیت می‌شود و بعد بقیهٔ سرورها "
 #               "یکی‌یکی. نسخهٔ قدیمی‌تر هیچ‌وقت نصب نمی‌شود.</p></div>"
@@ -29233,7 +29233,7 @@ exit 0
 #               "می‌مانند.</p>"
 #               "<p>آدرس: <code>%s</code></p>"
 #               "<p class='muted'>راهنمای کامل دستورها: "
-#               "<a href='https://github.com/mehdi047/doctor-dns/blob/main/docs/bot-api.md'"
+#               "<a href='https://github.com/AlirezaGhanavati/Mr_Ping/blob/main/docs/bot-api.md'"
 #               " target='_blank' rel='noopener'>docs/bot-api.md</a>. "
 #               "پورت ۸۴۴۵ را اگر فایروال سرور یا دیتاسنتر دارد باز کنید.</p></div>"
 #               % html.escape(bot_api_url())]
@@ -33922,7 +33922,7 @@ exit 0
 ## somewhere else; nothing else sets them.
 #ETC="${SMARTDNS_ETC:-/etc/smart-dns}"
 #VERSION_FILE="${SMARTDNS_VERSION_FILE:-/var/lib/smart-dns/version}"
-#REPO="https://github.com/mehdi047/doctor-dns"
+#REPO="https://github.com/AlirezaGhanavati/Mr_Ping"
 #
 #B=$'\e[1m'; D=$'\e[2m'; G=$'\e[32m'; Y=$'\e[33m'; N=$'\e[0m'
 #[ -t 1 ] || { B=; D=; G=; Y=; N=; }
@@ -34030,7 +34030,7 @@ exit 0
 #    local f latest
 #    f="$(mktemp)"
 #    printf '\n  fetching the latest installer...\n'
-#    if ! curl -fsSL -m 120 -o "$f" "https://raw.githubusercontent.com/mehdi047/doctor-dns/main/doctor-dns.sh"; then
+#    if ! curl -fsSL -m 120 -o "$f" "https://raw.githubusercontent.com/AlirezaGhanavati/Mr_Ping/main/doctor-dns.sh"; then
 #        echo "  the download failed"; rm -f "$f"; pause; return 0
 #    fi
 #    latest="$(bash "$f" --version 2>/dev/null || echo '?')"
@@ -42582,7 +42582,7 @@ exit 0
 #"ساعت": "Hour",
 #"ساعت دیگر دوباره امتحان کنید": "hours, try again",
 #"ساعت پیش": "hours ago",
-#"ساعت یک بار گیت‌هاب doctor-dns را چک می‌کند. با زدن دکمه، نصب‌کننده از خود ریلیز دانلود می‌شود و فقط وقتی نصب می‌شود که هشش با هشی که گیت‌هاب منتشر کرده یکی باشد. اول همین سرور آپدیت می‌شود و بعد بقیهٔ سرورها یکی‌یکی. نسخهٔ قدیمی‌تر هیچ‌وقت نصب نمی‌شود.": "hours the panel checks doctor-dns on GitHub. With the button, the installer is downloaded from the release itself and installed only when its hash matches the one GitHub published. This server is upgraded first, then the others one by one. An older version is never installed.",
+#"ساعت یک بار گیت‌هاب Mr Ping را چک می‌کند. با زدن دکمه، نصب‌کننده از خود ریلیز دانلود می‌شود و فقط وقتی نصب می‌شود که هشش با هشی که گیت‌هاب منتشر کرده یکی باشد. اول همین سرور آپدیت می‌شود و بعد بقیهٔ سرورها یکی‌یکی. نسخهٔ قدیمی‌تر هیچ‌وقت نصب نمی‌شود.": "hours the panel checks Mr Ping on GitHub. With the button, the installer is downloaded from the release itself and installed only when its hash matches the one GitHub published. This server is upgraded first, then the others one by one. An older version is never installed.",
 #"ساعت‌های پرمصرف": "Busiest hours",
 #"ساعت‌های پرمصرف — ۷ روز اخیر": "Busiest hours — last 7 days",
 #"سایبرپانک ۲۰۷۷": "Cyberpunk 2077",
