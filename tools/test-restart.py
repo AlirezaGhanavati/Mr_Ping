@@ -150,7 +150,7 @@ r = subprocess.run([BASH, posix(TOOL)], capture_output=True, text=True, timeout=
                    env=dict(os.environ, PATH=posix(fake) + ":" + os.environ.get("PATH", ""),
                             SMARTDNS_ETC=posix(tempfile.mkdtemp(dir=tmp)), FAKE_UID="0",
                             CALLS=posix(CALLS)))
-check("a machine without doctor dns is told so", r.returncode != 0
+check("a machine without Mr Ping is told so", r.returncode != 0
       and "not installed" in r.stderr, r.stderr)
 shutil.rmtree(tmp, ignore_errors=True)
 

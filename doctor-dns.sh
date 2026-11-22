@@ -701,7 +701,7 @@ exit_upstreams() {
     local line name here there tmp
     tmp="$(mktemp)"
     {
-        printf '# The way to the exit - written by doctor dns: the installer, and\n'
+        printf '# The way to the exit - written by Mr Ping: the installer, and\n'
         printf "# smartdns-sync when the admin panel turns this relay's tunnel on or off.\n"
         for line in "https $TUNNEL_LOCAL_HTTPS 443" "http $TUNNEL_LOCAL_HTTP 80" \
                     "spotify $TUNNEL_LOCAL_SPOTIFY 4070" "blizzard $TUNNEL_LOCAL_BLIZZARD 1119"; do
@@ -744,7 +744,7 @@ tunnel_toml() {
                 -subj "/CN=${PANEL_DOMAIN:-localhost}" -keyout "$k" -out "$c" >/dev/null 2>&1 || true
         fi ;;
     esac
-    printf "# written by doctor dns: the installer, or the admin panel's relays card\n"
+    printf "# written by Mr Ping: the installer, or the admin panel's relays card\n"
     if [ "$TUNNEL_DIRECTION" = l3 ]; then
         # The relay dials and keeps the same five ports on its loopback as
         # every other tunnel, each going to the exit's own port at the far
@@ -835,7 +835,7 @@ apply_tunnel() {
         mkdir -p /etc/nftables.d
         note_file "$TUNNEL_NFT"
         cat > "$TUNNEL_NFT" <<EOF
-# written by doctor dns: the tunnel's port answers $peer only
+# written by Mr Ping: the tunnel's port answers $peer only
 table inet smartdns_tunnel
 delete table inet smartdns_tunnel
 table inet smartdns_tunnel {
@@ -897,7 +897,7 @@ note_file() {
 case "${1:-}" in
     --version|-V) printf '%s\n' "$VERSION"; exit 0 ;;
     --help|-h)
-        printf 'doctor dns %s\n\n' "$VERSION"
+        printf 'Mr Ping %s\n\n' "$VERSION"
         printf 'usage: sudo bash %s [--uninstall | --tunnel]\n\n' "$0"
         printf '  no arguments   install or update this machine\n'
         printf '  --uninstall    put it back as it was\n'
@@ -933,28 +933,28 @@ banner() {
     printf '\n%s' "$c"
     if [ "$cols" -ge 90 ] 2>/dev/null; then
         printf '%s\n' \
-        '  ██████╗   ██████╗   ██████╗ ████████╗  ██████╗  ██████╗     ██████╗  ███╗   ██╗ ███████╗' \
-        '  ██╔══██╗ ██╔═══██╗ ██╔════╝ ╚══██╔══╝ ██╔═══██╗ ██╔══██╗    ██╔══██╗ ████╗  ██║ ██╔════╝' \
-        '  ██║  ██║ ██║   ██║ ██║         ██║    ██║   ██║ ██████╔╝    ██║  ██║ ██╔██╗ ██║ ███████╗' \
-        '  ██║  ██║ ██║   ██║ ██║         ██║    ██║   ██║ ██╔══██╗    ██║  ██║ ██║╚██╗██║ ╚════██║' \
-        '  ██████╔╝ ╚██████╔╝ ╚██████╗    ██║    ╚██████╔╝ ██║  ██║    ██████╔╝ ██║ ╚████║ ███████║' \
-        '  ╚═════╝   ╚═════╝   ╚═════╝    ╚═╝     ╚═════╝  ╚═╝  ╚═╝    ╚═════╝  ╚═╝  ╚═══╝ ╚══════╝'
+        '  ███╗   ███╗ ██████╗    ██████╗  ██╗ ███╗   ██╗  ██████╗' \
+        '  ████╗ ████║ ██╔══██╗    ██╔══██╗ ██║ ████╗  ██║ ██╔════╝' \
+        '  ██╔████╔██║ ██████╔╝    ██████╔╝ ██║ ██╔██╗ ██║ ██║  ███╗' \
+        '  ██║╚██╔╝██║ ██╔══██╗    ██╔═══╝  ██║ ██║╚██╗██║ ██║   ██║' \
+        '  ██║ ╚═╝ ██║ ██║  ██║    ██║      ██║ ██║ ╚████║ ╚██████╔╝' \
+        '  ╚═╝     ╚═╝ ╚═╝  ╚═╝    ╚═╝      ╚═╝ ╚═╝  ╚═══╝  ╚═════╝'
     else
         printf '%s\n' \
-        '  ██████╗   ██████╗   ██████╗ ████████╗  ██████╗  ██████╗ ' \
-        '  ██╔══██╗ ██╔═══██╗ ██╔════╝ ╚══██╔══╝ ██╔═══██╗ ██╔══██╗' \
-        '  ██║  ██║ ██║   ██║ ██║         ██║    ██║   ██║ ██████╔╝' \
-        '  ██║  ██║ ██║   ██║ ██║         ██║    ██║   ██║ ██╔══██╗' \
-        '  ██████╔╝ ╚██████╔╝ ╚██████╗    ██║    ╚██████╔╝ ██║  ██║' \
-        '  ╚═════╝   ╚═════╝   ╚═════╝    ╚═╝     ╚═════╝  ╚═╝  ╚═╝'
+        '        ███╗   ███╗ ██████╗' \
+        '        ████╗ ████║ ██╔══██╗' \
+        '        ██╔████╔██║ ██████╔╝' \
+        '        ██║╚██╔╝██║ ██╔══██╗' \
+        '        ██║ ╚═╝ ██║ ██║  ██║' \
+        '        ╚═╝     ╚═╝ ╚═╝  ╚═╝'
         printf '\n'
         printf '%s\n' \
-        '                ██████╗  ███╗   ██╗ ███████╗' \
-        '                ██╔══██╗ ████╗  ██║ ██╔════╝' \
-        '                ██║  ██║ ██╔██╗ ██║ ███████╗' \
-        '                ██║  ██║ ██║╚██╗██║ ╚════██║' \
-        '                ██████╔╝ ██║ ╚████║ ███████║' \
-        '                ╚═════╝  ╚═╝  ╚═══╝ ╚══════╝'
+        '  ██████╗  ██╗ ███╗   ██╗  ██████╗' \
+        '  ██╔══██╗ ██║ ████╗  ██║ ██╔════╝' \
+        '  ██████╔╝ ██║ ██╔██╗ ██║ ██║  ███╗' \
+        '  ██╔═══╝  ██║ ██║╚██╗██║ ██║   ██║' \
+        '  ██║      ██║ ██║ ╚████║ ╚██████╔╝' \
+        '  ╚═╝      ╚═╝ ╚═╝  ╚═══╝  ╚═════╝'
     fi
     printf '%s\n  %ssmart DNS for Iran, version %s%s\n' "$n" "${B:-}" "$VERSION" "$n"
 }
@@ -14930,7 +14930,7 @@ exit 0
 #    exit; the first of them all is the way, the rest are only fallbacks.
 #    With more than one exit, each also gets upstreams of its own that put it
 #    first, for the customers the admin sent through it."""
-#    out = ["# The way to the exit - written by doctor dns: the installer, and\n"
+#    out = ["# The way to the exit - written by Mr Ping: the installer, and\n"
 #           "# smartdns-sync when the admin panel turns this relay's tunnel on or off.\n"]
 #    order = order or [exit_ip]
 #    groups = [("to_exit", order)]
@@ -14956,7 +14956,7 @@ exit 0
 #
 #
 #def tunnel_nft_text(port, peer):
-#    return ("# written by doctor dns: the tunnel's port answers %(peer)s only\n"
+#    return ("# written by Mr Ping: the tunnel's port answers %(peer)s only\n"
 #            "table inet smartdns_tunnel\n"
 #            "delete table inet smartdns_tunnel\n"
 #            "table inet smartdns_tunnel {\n"
@@ -15079,7 +15079,7 @@ exit 0
 #    if carried is None:
 #        carried = list(TUNNEL_PORTS[:2]) + [("api", API_TUNNEL_PORT, API_PORT)] + list(TUNNEL_PORTS[2:])
 #    ports = ", ".join('"127.0.0.1:%d=%d"' % (local, port) for _, local, port in carried)
-#    out = ["# written by doctor dns: the installer, or the admin panel's relays card\n"]
+#    out = ["# written by Mr Ping: the installer, or the admin panel's relays card\n"]
 #    me = (CFG or {}).get("SELF_IP") or ""
 #    token = tunnel_token(secret, spec, me, exit_ip)
 #    if spec["direction"] == "l3":
@@ -15551,7 +15551,7 @@ exit 0
 #    changed = write_if_changed(os.path.join(where, "tunnel.toml"), text, 0o600)
 #    path, table = instance_nft(peer)
 #    if listen:
-#        rules = ("# written by doctor dns: the tunnel's port answers %s only\n"
+#        rules = ("# written by Mr Ping: the tunnel's port answers %s only\n"
 #                 "table inet %s\ndelete table inet %s\ntable inet %s {\n    chain input {\n"
 #                 "        type filter hook input priority -5 ; policy accept ;\n"
 #                 "        tcp dport %d ip saddr != %s drop\n"
@@ -15628,7 +15628,7 @@ exit 0
 #
 #def exit_side_toml(relay, spec, secret, where):
 #    """A node's end of a relay's tunnel - the exit's, word for word."""
-#    out = ["# written by doctor dns: the admin panel's relays card\n"]
+#    out = ["# written by Mr Ping: the admin panel's relays card\n"]
 #    me = (CFG or {}).get("SELF_IP") or ""
 #    token = tunnel_token(secret, spec, relay, me)
 #    if spec["direction"] == "l3":
@@ -16667,12 +16667,12 @@ exit 0
 #
 #def brand_html():
 #    return ("<div class='brand'><span class='mark'>🩺</span>"
-#            "<span class='name'>doctor dns</span></div>")
+#            "<span class='name'>Mr Ping</span></div>")
 #
 #
 #def footer_html():
 #    v = app_version()
-#    return "<footer>doctor dns%s</footer>" % (" v" + html.escape(v) if v else "")
+#    return "<footer>Mr Ping%s</footer>" % (" v" + html.escape(v) if v else "")
 #
 #
 #def brand():
@@ -19449,7 +19449,7 @@ exit 0
 
 #__BEGIN_NODE_SERVICE__
 #[Unit]
-#Description=doctor dns node - another exit joined to the panel: relays and resolvers in, health and logs out
+#Description=Mr Ping node - another exit joined to the panel: relays and resolvers in, health and logs out
 #After=network-online.target nginx.service
 #Wants=network-online.target
 #
@@ -22459,7 +22459,7 @@ exit 0
 #
 #
 #def exit_tunnel_toml(ip, spec, secret, where):
-#    out = ["# written by the doctor dns admin panel - its relays card changes it\n"]
+#    out = ["# written by the Mr Ping admin panel - its relays card changes it\n"]
 #    token = tunnel_token(secret, spec, ip, exit_address())
 #    if spec["direction"] == "l3":
 #        theirs, mine, iface = l3_block(ip)
@@ -22533,7 +22533,7 @@ exit 0
 #    if spec["direction"] != "reverse":
 #        # This end listens: its port answers that relay and nobody else.
 #        port = spec["port"]
-#        rules = ("# written by the doctor dns admin panel: the tunnel's port answers %s only\n"
+#        rules = ("# written by the Mr Ping admin panel: the tunnel's port answers %s only\n"
 #                 "table inet %s\ndelete table inet %s\ntable inet %s {\n    chain input {\n"
 #                 "        type filter hook input priority -5 ; policy accept ;\n"
 #                 "        tcp dport %d ip saddr != %s drop\n"
@@ -24554,12 +24554,12 @@ exit 0
 #
 #def brand_html():
 #    return ("<div class='brand'><span class='mark'>🩺</span>"
-#            "<span class='name'>doctor dns</span></div>")
+#            "<span class='name'>Mr Ping</span></div>")
 #
 #
 #def footer_html():
 #    v = app_version()
-#    return "<footer>doctor dns%s</footer>" % (" v" + html.escape(v) if v else "")
+#    return "<footer>Mr Ping%s</footer>" % (" v" + html.escape(v) if v else "")
 #
 #
 #def font_face(prefix):
@@ -30670,7 +30670,7 @@ exit 0
 #                      " next_at) VALUES (?, 'ping', ?, ?, ?)",
 #                      (kid, json.dumps({"event": "ping", "created_at": stamp,
 #                                        "telegram_id": None, "user_id": None,
-#                                        "data": {"text": "آزمایش از پنل doctor-dns"}},
+#                                        "data": {"text": "آزمایش از پنل Mr Ping"}},
 #                                       ensure_ascii=False), stamp, stamp))
 #            return self.redirect("api?m=خبر آزمایشی در صف است؛ چند ثانیه دیگر وضعیتش "
 #                                 "پایین همین صفحه دیده می‌شود")
@@ -32595,7 +32595,7 @@ exit 0
 #fi
 #status="${status# }"; logs="${logs# }"
 #if [ -z "$role" ]; then
-#    echo "doctor dns is not installed on this machine" >&2
+#    echo "Mr Ping is not installed on this machine" >&2
 #    exit 1
 #fi
 ## The tunnel, on either side, when the installer set one up.
@@ -32636,7 +32636,7 @@ exit 0
 #    out="${SMARTDNS_REPORT_DIR:-/tmp}/doctor-dns-report-$role-$(date -u +%Y%m%d-%H%M%S).txt"
 #    umask 077
 #    {
-#        echo "doctor dns report - $role - $(date -u '+%F %T') UTC"
+#        echo "Mr Ping report - $role - $(date -u '+%F %T') UTC"
 #        echo "version  $(cat /var/lib/smart-dns/version 2>/dev/null || echo '?')"
 #        echo "system   $(. /etc/os-release 2>/dev/null; echo "${PRETTY_NAME:-?}"), kernel $(uname -r)"
 #        echo "up       $(uptime -p 2>/dev/null || echo '?')"
@@ -32676,7 +32676,7 @@ exit 0
 #    exec journalctl "${args[@]}" ${prio[@]+"${prio[@]}"} -f -n 20 --no-pager -o short-iso
 #fi
 #
-#printf 'doctor dns %s - %s\n' \
+#printf 'Mr Ping %s - %s\n' \
 #       "$(cat /var/lib/smart-dns/version 2>/dev/null || echo '?')" "$role"
 #echo
 #echo "== services"
@@ -33016,7 +33016,7 @@ exit 0
 #    regs = registered()
 #    ports = assignment()
 #    on_profile = set().union(*ports.values()) if ports else set()
-#    print("doctor dns routing - this relay answers as %s" % (me or "?"))
+#    print("Mr Ping routing - this relay answers as %s" % (me or "?"))
 #    print()
 #    print("  %5s  %9s  %8s  %6s  %6s  %-9s %s"
 #          % ("PORT", "CUSTOMERS", "REDIRECT", "BYPASS", "PINNED", "STATE", "TEMPLATE"))
@@ -33171,7 +33171,7 @@ exit 0
 
 #__BEGIN_SMARTDNS_RESTART__
 ##!/bin/bash
-## smartdns-restart - restart every part of doctor dns on this machine at once.
+## smartdns-restart - restart every part of Mr Ping on this machine at once.
 ##
 ## usage: smartdns-restart      restart them all, then say which came back up
 ##        smartdns-restart -h   this help
@@ -33208,7 +33208,7 @@ exit 0
 #    units="$units smartdns-sync smartdns-doh$resolvers dnsmasq coturn"
 #fi
 #if [ -z "$role" ]; then
-#    echo "doctor dns is not installed on this machine" >&2
+#    echo "Mr Ping is not installed on this machine" >&2
 #    exit 1
 #fi
 #units="${units# } smartdns-tunnel nginx"
@@ -33222,7 +33222,7 @@ exit 0
 #    systemctl restart "$@" 2>&1 | sed 's/^/    /'
 #}
 #
-#echo "restarting doctor dns - $role"
+#echo "restarting Mr Ping - $role"
 #[ "$role" != exit ] && echo "customers' open connections drop for a moment and come straight back"
 #echo
 #
@@ -33762,7 +33762,7 @@ exit 0
 
 #__BEGIN_TUNNEL_SERVICE__
 #[Unit]
-#Description=doctor dns tunnel between the relay and the exit (BackPack)
+#Description=Mr Ping tunnel between the relay and the exit (BackPack)
 #After=network-online.target
 #Wants=network-online.target
 #
@@ -33788,7 +33788,7 @@ exit 0
 
 #__BEGIN_TUNNEL_INSTANCE__
 #[Unit]
-#Description=doctor dns tunnel to %i (BackPack)
+#Description=Mr Ping tunnel to %i (BackPack)
 #After=network-online.target
 #Wants=network-online.target
 #
@@ -33843,7 +33843,7 @@ exit 0
 #
 #if [ -f "$ETC/sync.env" ]; then role=relay; env="$ETC/sync.env"
 #elif [ -f "$ETC/panel.env" ]; then role=exit; env="$ETC/panel.env"
-#else echo "doctor dns is not installed on this machine" >&2; exit 1; fi
+#else echo "Mr Ping is not installed on this machine" >&2; exit 1; fi
 #
 #get() { sed -n "s/^$1=//p" "$env" 2>/dev/null | head -1; }
 #set_key() {
@@ -33909,7 +33909,7 @@ exit 0
 
 #__BEGIN_SMARTDNS_MENU__
 ##!/bin/bash
-## smartdns-menu - every doctor dns command in one place, for when you do not
+## smartdns-menu - every Mr Ping command in one place, for when you do not
 ## remember the name of the one you want.
 ##
 ## usage: sudo smartdns-menu
@@ -33937,7 +33937,7 @@ exit 0
 #if [ -f "$ETC/sync.env" ] && [ -f "$ETC/panel.env" ]; then role=single
 #elif [ -f "$ETC/sync.env" ]; then role=relay
 #elif [ -f "$ETC/panel.env" ]; then role=exit
-#else echo "doctor dns is not installed on this machine" >&2; exit 1; fi
+#else echo "Mr Ping is not installed on this machine" >&2; exit 1; fi
 #VERSION="$(cat "$VERSION_FILE" 2>/dev/null || echo '?')"
 #
 ## ------------------------------------------------------------------ helpers
@@ -34047,7 +34047,7 @@ exit 0
 #
 #uninstall() {
 #    local a
-#    printf '  %sThis removes doctor dns from this machine.%s type uninstall to go ahead: ' "$Y" "$N"
+#    printf '  %sThis removes Mr Ping from this machine.%s type uninstall to go ahead: ' "$Y" "$N"
 #    read -r a || exit 0
 #    [ "$a" = uninstall ] && installer --uninstall
 #}
@@ -34123,7 +34123,7 @@ exit 0
 #        "the version installed here: $VERSION   (doctor-dns.sh --version)|printf '\n  %s\n' \"\$VERSION\"; pause" \
 #        'update to the latest version|update' \
 #        'get or renew a certificate   (smartdns-cert)|ask "domain" && run smartdns-cert "$REPLY"' \
-#        'remove doctor dns from this machine   (doctor-dns.sh --uninstall)|uninstall'
+#        'remove Mr Ping from this machine   (doctor-dns.sh --uninstall)|uninstall'
 #}
 #
 #restart_all() {
@@ -34163,7 +34163,7 @@ exit 0
 #            'installation, updates and certificates|menu_install'
 #        )
 #    fi
-#    BACK=quit choose "doctor dns $VERSION - $role" "${items[@]}"
+#    BACK=quit choose "Mr Ping $VERSION - $role" "${items[@]}"
 #}
 #
 #main
@@ -41489,7 +41489,7 @@ exit 0
 #"آرک‌نایتس": "Arknights",
 #"آزاد شد": "Unblocked",
 #"آزاد کن": "Unblock",
-#"آزمایش از پنل doctor-dns": "Test from the doctor-dns panel",
+#"آزمایش از پنل Mr Ping": "Test from the Mr Ping panel",
 #"آزمایش و ذخیره": "Test and save",
 #"آستتو کورسا": "Assetto Corsa",
 #"آلبیون آنلاین": "Albion Online",

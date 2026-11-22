@@ -2091,7 +2091,7 @@ def exit_conf_text(exit_ip, tunnel, order=None, down=(), nodes=None):
     exit; the first of them all is the way, the rest are only fallbacks.
     With more than one exit, each also gets upstreams of its own that put it
     first, for the customers the admin sent through it."""
-    out = ["# The way to the exit - written by doctor dns: the installer, and\n"
+    out = ["# The way to the exit - written by Mr Ping: the installer, and\n"
            "# smartdns-sync when the admin panel turns this relay's tunnel on or off.\n"]
     order = order or [exit_ip]
     groups = [("to_exit", order)]
@@ -2117,7 +2117,7 @@ def exit_conf_text(exit_ip, tunnel, order=None, down=(), nodes=None):
 
 
 def tunnel_nft_text(port, peer):
-    return ("# written by doctor dns: the tunnel's port answers %(peer)s only\n"
+    return ("# written by Mr Ping: the tunnel's port answers %(peer)s only\n"
             "table inet smartdns_tunnel\n"
             "delete table inet smartdns_tunnel\n"
             "table inet smartdns_tunnel {\n"
@@ -2240,7 +2240,7 @@ def tunnel_toml_text(spec, exit_ip, secret, carried=None):
     if carried is None:
         carried = list(TUNNEL_PORTS[:2]) + [("api", API_TUNNEL_PORT, API_PORT)] + list(TUNNEL_PORTS[2:])
     ports = ", ".join('"127.0.0.1:%d=%d"' % (local, port) for _, local, port in carried)
-    out = ["# written by doctor dns: the installer, or the admin panel's relays card\n"]
+    out = ["# written by Mr Ping: the installer, or the admin panel's relays card\n"]
     me = (CFG or {}).get("SELF_IP") or ""
     token = tunnel_token(secret, spec, me, exit_ip)
     if spec["direction"] == "l3":
@@ -2712,7 +2712,7 @@ def run_instance(peer, text, listen):
     changed = write_if_changed(os.path.join(where, "tunnel.toml"), text, 0o600)
     path, table = instance_nft(peer)
     if listen:
-        rules = ("# written by doctor dns: the tunnel's port answers %s only\n"
+        rules = ("# written by Mr Ping: the tunnel's port answers %s only\n"
                  "table inet %s\ndelete table inet %s\ntable inet %s {\n    chain input {\n"
                  "        type filter hook input priority -5 ; policy accept ;\n"
                  "        tcp dport %d ip saddr != %s drop\n"
@@ -2789,7 +2789,7 @@ def apply_node_tunnels(raw):
 
 def exit_side_toml(relay, spec, secret, where):
     """A node's end of a relay's tunnel - the exit's, word for word."""
-    out = ["# written by doctor dns: the admin panel's relays card\n"]
+    out = ["# written by Mr Ping: the admin panel's relays card\n"]
     me = (CFG or {}).get("SELF_IP") or ""
     token = tunnel_token(secret, spec, relay, me)
     if spec["direction"] == "l3":
@@ -3828,12 +3828,12 @@ def app_version():
 
 def brand_html():
     return ("<div class='brand'><span class='mark'>🩺</span>"
-            "<span class='name'>doctor dns</span></div>")
+            "<span class='name'>Mr Ping</span></div>")
 
 
 def footer_html():
     v = app_version()
-    return "<footer>doctor dns%s</footer>" % (" v" + html.escape(v) if v else "")
+    return "<footer>Mr Ping%s</footer>" % (" v" + html.escape(v) if v else "")
 
 
 def brand():

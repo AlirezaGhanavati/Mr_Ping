@@ -1,4 +1,4 @@
-# doctor dns
+# Mr Ping
 
 *[فارسی](README.fa.md)*
 
@@ -818,14 +818,14 @@ reach the service from.
   (ISC). Each logo is its owner's trademark.
 - **[HyperDNS](https://github.com/IzumiRain/HyperDNS)**, by **Rain**
   ([@IzumiRain](https://github.com/IzumiRain)), a standalone smart DNS written in Go
-  and released under the AGPL-3.0. Reading it showed us what doctor dns was
+  and released under the AGPL-3.0. Reading it showed us what Mr Ping was
   missing, and several features here began as its ideas: DNS over HTTPS and over
   TLS, with the customer usage dashboard and the choice of public resolvers planned
   beside them (0.7.0); the sealed, encrypted receipts (0.7.2); the DNS report that
   says which rule each name met (0.7.3); an answer that says the resolver failed,
   rather than silence (0.7.4); blocked domains and the single-server install (0.8.0);
   the services' logos, and groups of your own domains with an icon (0.9.10).
-  doctor dns uses none of its code - each was written here, in Python, for this
+  Mr Ping uses none of its code - each was written here, in Python, for this
   design - but the ideas were theirs first. Thank you, Rain.
 - The installer's check of whose name an exit's address is registered in asks the
   regional internet registries' public RDAP service, through [rdap.org](https://rdap.org/).

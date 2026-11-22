@@ -2064,7 +2064,7 @@ tunnelPick(document.currentScript.previousElementSibling);
 
 
 def exit_tunnel_toml(ip, spec, secret, where):
-    out = ["# written by the doctor dns admin panel - its relays card changes it\n"]
+    out = ["# written by the Mr Ping admin panel - its relays card changes it\n"]
     token = tunnel_token(secret, spec, ip, exit_address())
     if spec["direction"] == "l3":
         theirs, mine, iface = l3_block(ip)
@@ -2138,7 +2138,7 @@ def apply_exit_tunnel(ip):
     if spec["direction"] != "reverse":
         # This end listens: its port answers that relay and nobody else.
         port = spec["port"]
-        rules = ("# written by the doctor dns admin panel: the tunnel's port answers %s only\n"
+        rules = ("# written by the Mr Ping admin panel: the tunnel's port answers %s only\n"
                  "table inet %s\ndelete table inet %s\ntable inet %s {\n    chain input {\n"
                  "        type filter hook input priority -5 ; policy accept ;\n"
                  "        tcp dport %d ip saddr != %s drop\n"
@@ -4159,12 +4159,12 @@ def app_version():
 
 def brand_html():
     return ("<div class='brand'><span class='mark'>🩺</span>"
-            "<span class='name'>doctor dns</span></div>")
+            "<span class='name'>Mr Ping</span></div>")
 
 
 def footer_html():
     v = app_version()
-    return "<footer>doctor dns%s</footer>" % (" v" + html.escape(v) if v else "")
+    return "<footer>Mr Ping%s</footer>" % (" v" + html.escape(v) if v else "")
 
 
 def font_face(prefix):
@@ -10275,7 +10275,7 @@ class Admin(http.server.BaseHTTPRequestHandler):
                       " next_at) VALUES (?, 'ping', ?, ?, ?)",
                       (kid, json.dumps({"event": "ping", "created_at": stamp,
                                         "telegram_id": None, "user_id": None,
-                                        "data": {"text": "آزمایش از پنل doctor-dns"}},
+                                        "data": {"text": "آزمایش از پنل Mr Ping"}},
                                        ensure_ascii=False), stamp, stamp))
             return self.redirect("api?m=خبر آزمایشی در صف است؛ چند ثانیه دیگر وضعیتش "
                                  "پایین همین صفحه دیده می‌شود")

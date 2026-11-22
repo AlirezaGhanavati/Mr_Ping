@@ -2,7 +2,7 @@
 """The installer opens with its name, large.
 
 What has to hold: before anything else - root or not - an install, an
-upgrade or an uninstall shows DOCTOR DNS in block letters and the version,
+upgrade or an uninstall shows MR PING in block letters and the version,
 on one line in a wide terminal and on two in a narrow one, never wider than
 it says; --version and --help print only what a script asking wants.
 """

@@ -96,11 +96,11 @@ check("-h explains it, without needing root", r.returncode == 0 and "smartdns-me
 rc, out, _ = drive(RELAY, ["0"], FAKE_UID="1000")
 check("it wants root", rc != 0)
 rc, out, _ = drive(tempfile.mkdtemp(dir=tmp), ["0"])
-check("a machine without doctor dns is told so", rc != 0)
+check("a machine without Mr Ping is told so", rc != 0)
 
 print("on a relay")
 rc, out, calls = drive(RELAY, ["0"])
-check("it opens on the relay's menu, with its version", rc == 0 and "doctor dns 0.9.9 - relay" in out, out[:300])
+check("it opens on the relay's menu, with its version", rc == 0 and "Mr Ping 0.9.9 - relay" in out, out[:300])
 check("the top menu quits, and says so", "0) quit" in out, out)
 for part in ("status and logs", "domains", "customers and access", "tunnel to the exit",
              "restart everything", "installation"):
@@ -135,7 +135,7 @@ check("running out of input ends it cleanly", rc == 0)
 
 print("on an exit")
 rc, out, calls = drive(EXIT, ["0"])
-check("it opens on the exit's menu", "doctor dns 0.9.9 - exit" in out and "admin panel" in out, out[:400])
+check("it opens on the exit's menu", "Mr Ping 0.9.9 - exit" in out and "admin panel" in out, out[:400])
 check("with nothing that belongs on a relay", "domains" not in out and "customers" not in out, out)
 rc, out, calls = drive(EXIT, ["2", "1", "", "0", "0"])
 check("the admin panel's address is one choice away", calls.strip() == "smartdns-access", calls)
