@@ -1000,6 +1000,31 @@ check("  then the version it is on, how it went and the log's end",
       result["ok"] and result["version"] == "0.9.0" and "installed and working" in result["log"])
 sync.upgrade_heard()
 check("  sent until the panel has it", sync.upgrade_result() is None)
+
+# a run that failed: once the panel has heard it, the same installer can be ordered again
+blob2 = b"#!/bin/bash\nVERSION=\"0.9.1\"\n"
+sha2 = __import__("hashlib").sha256(blob2).hexdigest()
+sync.fetch = lambda path: (blob2, {})
+ran.clear()
+sync.start_upgrade({"version": "0.9.1", "sha": sha2})
+check("a failed run: it started", any(a[:1] == ("systemd-run",) for a in ran))
+with open(os.path.join(up, "run.log"), "w") as fh:
+    fh.write("...\nx a site loads through the full chain  (got: 000)\nSomething is off\n")
+with open(os.path.join(up, "rc"), "w") as fh:
+    fh.write("0\n")
+bad = sync.upgrade_result()
+check("  is not a success, though it ended cleanly", bad is not None and not bad["ok"])
+ran.clear()
+sync.start_upgrade({"version": "0.9.1", "sha": sha2})
+check("  and until the panel has heard it, the order is not run again",
+      not any(a[:1] == ("systemd-run",) for a in ran))
+sync.upgrade_heard(bad)
+ran.clear()
+sync.start_upgrade({"version": "0.9.1", "sha": sha2})
+check("  once heard, the same installer can be ordered again",
+      any(a[:1] == ("systemd-run",) for a in ran))
+sync.upgrade_heard()
+sync.fetch = lambda path: (blob, {})
 with open(os.path.join(admin.PANEL_ENV), "w") as fh:
     fh.write("RELAY_IP=198.51.100.1\nNODE_IP=93.184.216.20\n")
 admin.INSTALLER_COPY = os.path.join(tmp, "installer.sh")

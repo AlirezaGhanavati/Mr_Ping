@@ -2522,7 +2522,7 @@ def node_once():
         payload["nginx_logs"] = nginx_errors()
     answer = post("/node", payload)
     if finished_upgrade and answer.get("upgrade_ack"):
-        upgrade_heard()
+        upgrade_heard(finished_upgrade)
     try:
         follow_panel(answer.get("panel"))
     except Exception as e:
@@ -3067,12 +3067,20 @@ def upgrade_result():
             "ok": rc.strip() == "0" and "is installed and working" in text}
 
 
-def upgrade_heard():
-    """The panel has the result: it is not sent again."""
+def upgrade_heard(result=None):
+    """The panel has the result: it is not sent again. A run that failed also
+    forgets which installer it was: the marker only stops the same order
+    running twice, and left in place after a failure it made every retry of
+    that same installer do nothing, while the panel waited for it."""
     try:
         os.unlink(os.path.join(UPGRADE_DIR, "rc"))
     except OSError:
         pass
+    if result is not None and not result.get("ok"):
+        try:
+            os.unlink(os.path.join(UPGRADE_DIR, "started"))
+        except OSError:
+            pass
 
 
 # ------------------------------------------------------------- WireGuard
@@ -3471,7 +3479,7 @@ def sync_once():
     except Exception as e:
         log(WARN, "DoH name not applied: %s" % e)
     if finished_upgrade and answer.get("upgrade_ack"):
-        upgrade_heard()
+        upgrade_heard(finished_upgrade)
     try:
         follow_panel(answer.get("panel"))
     except Exception as e:

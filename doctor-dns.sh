@@ -38,7 +38,7 @@ STAMP="$(date +%Y%m%d-%H%M%S)"
 # What this file is. Written to the machine once an install finishes, so the
 # next run can tell whether it is an upgrade, a re-run, or somebody about to
 # put an older version over a newer one by accident.
-VERSION="1.1.1"
+VERSION="1.1.2"
 
 # What this install did, so uninstall can undo exactly that and nothing more.
 # Without it, removal would be guesswork: whether dnsmasq was ours or already
@@ -15361,7 +15361,7 @@ exit 0
 #        payload["nginx_logs"] = nginx_errors()
 #    answer = post("/node", payload)
 #    if finished_upgrade and answer.get("upgrade_ack"):
-#        upgrade_heard()
+#        upgrade_heard(finished_upgrade)
 #    try:
 #        follow_panel(answer.get("panel"))
 #    except Exception as e:
@@ -15906,12 +15906,20 @@ exit 0
 #            "ok": rc.strip() == "0" and "is installed and working" in text}
 #
 #
-#def upgrade_heard():
-#    """The panel has the result: it is not sent again."""
+#def upgrade_heard(result=None):
+#    """The panel has the result: it is not sent again. A run that failed also
+#    forgets which installer it was: the marker only stops the same order
+#    running twice, and left in place after a failure it made every retry of
+#    that same installer do nothing, while the panel waited for it."""
 #    try:
 #        os.unlink(os.path.join(UPGRADE_DIR, "rc"))
 #    except OSError:
 #        pass
+#    if result is not None and not result.get("ok"):
+#        try:
+#            os.unlink(os.path.join(UPGRADE_DIR, "started"))
+#        except OSError:
+#            pass
 #
 #
 ## ------------------------------------------------------------- WireGuard
@@ -16310,7 +16318,7 @@ exit 0
 #    except Exception as e:
 #        log(WARN, "DoH name not applied: %s" % e)
 #    if finished_upgrade and answer.get("upgrade_ack"):
-#        upgrade_heard()
+#        upgrade_heard(finished_upgrade)
 #    try:
 #        follow_panel(answer.get("panel"))
 #    except Exception as e:
