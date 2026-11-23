@@ -60,8 +60,13 @@ if [ -f "$ETC/sync.env" ]; then
     fi
     for f in /etc/smartdns-profiles/*.conf; do
         [ -e "$f" ] || continue
-        status="$status smartdns-dns@$(basename "$f" .conf)"
-        logs="$logs smartdns-dns@$(basename "$f" .conf)"
+        name="$(basename "$f" .conf)"
+        # The gate's resolver has its own unit, not an instance of the
+        # template: listing it as smartdns-dns@gate showed a service that
+        # was never started as "inactive" while the real one worked.
+        if [ "$name" = gate ]; then unit=smartdns-dns-gate; else unit="smartdns-dns@$name"; fi
+        status="$status $unit"
+        logs="$logs $unit"
     done
 fi
 status="${status# }"; logs="${logs# }"

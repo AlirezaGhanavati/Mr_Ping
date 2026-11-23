@@ -54,6 +54,8 @@ check("so is a line count that is not a number",
 src = open(TOOL, encoding="utf-8").read()
 check("it knows the relay's parts", "smartdns-sync" in src and "dnsmasq" in src)
 check("and each template's own resolver", "smartdns-dns@" in src)
+check("  but the gate's resolver is its own unit, not smartdns-dns@gate",
+      "unit=smartdns-dns-gate" in src and '"$name" = gate' in src)
 check("and the exit's", "smartdns-panel" in src and "smartdns-admin" in src)
 check("it never prints a config file", "/etc/smart-dns/*.env" not in src
       and "cat /etc/smart-dns" not in src)

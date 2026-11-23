@@ -38,7 +38,7 @@ STAMP="$(date +%Y%m%d-%H%M%S)"
 # What this file is. Written to the machine once an install finishes, so the
 # next run can tell whether it is an upgrade, a re-run, or somebody about to
 # put an older version over a newer one by accident.
-VERSION="1.1.2"
+VERSION="1.1.3"
 
 # What this install did, so uninstall can undo exactly that and nothing more.
 # Without it, removal would be guesswork: whether dnsmasq was ours or already
@@ -32678,8 +32678,13 @@ exit 0
 #    fi
 #    for f in /etc/smartdns-profiles/*.conf; do
 #        [ -e "$f" ] || continue
-#        status="$status smartdns-dns@$(basename "$f" .conf)"
-#        logs="$logs smartdns-dns@$(basename "$f" .conf)"
+#        name="$(basename "$f" .conf)"
+#        # The gate's resolver has its own unit, not an instance of the
+#        # template: listing it as smartdns-dns@gate showed a service that
+#        # was never started as "inactive" while the real one worked.
+#        if [ "$name" = gate ]; then unit=smartdns-dns-gate; else unit="smartdns-dns@$name"; fi
+#        status="$status $unit"
+#        logs="$logs $unit"
 #    done
 #fi
 #status="${status# }"; logs="${logs# }"
