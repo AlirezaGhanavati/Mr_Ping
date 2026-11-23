@@ -38,7 +38,7 @@ STAMP="$(date +%Y%m%d-%H%M%S)"
 # What this file is. Written to the machine once an install finishes, so the
 # next run can tell whether it is an upgrade, a re-run, or somebody about to
 # put an older version over a newer one by accident.
-VERSION="1.1.0"
+VERSION="1.1.1"
 
 # What this install did, so uninstall can undo exactly that and nothing more.
 # Without it, removal would be guesswork: whether dnsmasq was ours or already
@@ -23066,7 +23066,7 @@ exit 0
 #
 #def check_github(opener=None):
 #    """Look for a new release and note what was found, for the nodes page."""
-#    state = {"checked_at": now()}
+#    state = {"checked_at": now(), "repo": GITHUB_REPO}
 #    try:
 #        state.update(github_latest(opener))
 #    except Exception as e:
@@ -23076,10 +23076,16 @@ exit 0
 #
 #
 #def github_state():
+#    """What the last check found. A result saved by a version that looked at
+#    another repository (it carries no repo, or a different one) is not this
+#    panel's to show: it is dropped, and the next pass checks again at once."""
 #    try:
-#        return json.loads(setting("github_latest") or "{}")
+#        state = json.loads(setting("github_latest") or "{}")
 #    except ValueError:
 #        return {}
+#    if state and state.get("repo") != GITHUB_REPO:
+#        return {}
+#    return state
 #
 #
 #def update_check_loop():

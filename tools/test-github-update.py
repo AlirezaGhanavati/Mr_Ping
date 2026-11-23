@@ -157,6 +157,19 @@ with open(os.path.join(admin.SELF_UPGRADE_DIR, "run.log"), "w") as fh:
     fh.write("ERROR: something\n")
 check("a failed upgrade shows its log", "ERROR: something" in admin.github_card("p"))
 
+print("a result saved by a version that looked elsewhere")
+admin.put_setting("github_latest", json.dumps(
+    {"checked_at": admin.now(), "version": "0.9.9", "page": "https://old.example/releases/v0.9.9"}))
+check("is not shown", admin.github_state() == {})
+stale_card = admin.github_card("p")
+check("  not its version, nor its link", "0.9.9" not in stale_card and "old.example" not in stale_card)
+admin.put_setting("github_latest", json.dumps(
+    {"checked_at": admin.now(), "repo": "someone/else", "version": "0.9.9"}))
+check("  nor one that names another repository", admin.github_state() == {})
+found = admin.check_github(opener)
+check("the next check saves where it looked", found.get("repo") == admin.GITHUB_REPO
+      and admin.github_state().get("version") == "0.9.1")
+
 shutil.rmtree(tmp, ignore_errors=True)
 print()
 if fails:
